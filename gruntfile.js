@@ -31,14 +31,28 @@ module.exports = function (grunt) {
 					reporter: 'spec',
 					require: paths.test + '/blanket'
 				},
-				src: [paths.test + '/unit/**/*.js'],
-				reporter: 'XUnit',
-				dest: paths.tmp + '/xunit.out'
+				src: [paths.test + '/unit/**/*.js'],		
 			},
 			integration: {
 				options: {
 					reporter: 'spec',
 					require: paths.test + '/blanket'
+				},
+				src: [paths.test + '/integration/**/*.js']
+			},
+			'unit-jenkins': {
+				options: {
+					reporter: 'XUnit',
+					require: paths.test + '/blanket',
+					captureFile: paths.tmp + '/xunit.xml'
+				},
+				src: [paths.test + '/unit/**/*.js'],		
+			},
+			'integration-jenkins': {
+				options: {
+					reporter: 'XUnit',
+					require: paths.test + '/blanket',
+					captureFile: paths.tmp + '/xunit.xml'
 				},
 				src: [paths.test + '/integration/**/*.js']
 			},
@@ -49,7 +63,14 @@ module.exports = function (grunt) {
 					captureFile: paths.tmp + '/coverage.html'
 				},
 				src: [paths.test +  '/**/*.js']
-			}
+			},
+			// xunitreport: {
+			// 	options: {
+			// 		reporter: 'XUnit',
+			// 		captureFile: paths.tmp + '/xunit.xml'
+			// 	},
+			// 	src: [paths.test +  '/**/*.js']
+			// }
 		},
 		// watch changes in js files and validate them
 		watch: {
@@ -94,7 +115,18 @@ module.exports = function (grunt) {
 	// Testing
 	grunt.registerTask('test', [
 		'mochaTest:unit',		// run unit tests
-		'mochaTest:integration'	// run unit tests
+		'mochaTest:integration',	// run unit tests
+		// 'mochaTest:xunitreport'	 //run xunit reporter
+	]);
+
+		// Testing
+	grunt.registerTask('jenkins', [
+		'clean',
+		'mkdir',
+		'mochaTest:unit-jenkins',		// run unit tests
+		'mochaTest:integration-jenkins',	// run unit tests
+		'report'
+		// 'mochaTest:xunitreport'	 //run xunit reporter
 	]);
 
 
