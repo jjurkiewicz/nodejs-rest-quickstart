@@ -33,7 +33,7 @@ module.exports = function (grunt) {
 				},
 				src: [paths.test + '/unit/**/*.js'],
 				reporter: 'XUnit',
-				dest: ./test/output/unit/xunit.out
+				dest: './test/output/unit/xunit.out'
 			},
 			integration: {
 				options: {
