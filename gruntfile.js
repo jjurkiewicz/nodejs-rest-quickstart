@@ -31,7 +31,9 @@ module.exports = function (grunt) {
 					reporter: 'spec',
 					require: paths.test + '/blanket'
 				},
-				src: [paths.test + '/unit/**/*.js']
+				src: [paths.test + '/unit/**/*.js'],
+				reporter: 'XUnit',
+				dest: ./test/output/xunit.out
 			},
 			integration: {
 				options: {
