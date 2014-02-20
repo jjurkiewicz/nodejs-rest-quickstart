@@ -50,12 +50,14 @@ module.exports = function (grunt) {
 		    	src: ['test/**/*.js'],
 		    	dest: ['tmp/xunit-simplemocha.xml']
 			}
-		 }
+		 },
 
-		 jenkins: {
-		 	command: 'mocha --reporter mocha-jenkins-reporter test/**/*.js'
+		 shell: {
+			 jenkins: {
+			 	command: 'mocha --reporter mocha-jenkins-reporter test/**/*.js'
 
-		 }
+			 }
+		}
 
 		 // blanket_mocha: {
 		 //    src: [ paths.test +  '/**/*.js' ],
@@ -69,7 +71,7 @@ module.exports = function (grunt) {
 });
 
 	grunt.registerTask('default', [
-		'jenkins'	// run unit tests
+		'shell:jenkins'	// run unit tests
 	]);
 
 	// Development
