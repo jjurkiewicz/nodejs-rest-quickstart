@@ -7,7 +7,7 @@ describe('Calculator',function(){
 
 	it('should return 3 when adding 1 and 2', function() {
 		var calc = new Calculator();
-		calc.add(1, 2).should.equal(3);
+		calc.add(1, 2).should.equal(4);
 	});
 
 });

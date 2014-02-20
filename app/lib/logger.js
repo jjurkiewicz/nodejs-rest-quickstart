@@ -32,19 +32,21 @@ exports.create = function(name) {
 function generateStreams() {
 	var projectDir = __dirname + '/../../';
 	var streams = [];
-	config.logger.streams.forEach(function(streamConf) {
-		switch (streamConf.type) {
-			case "file":
-				streams.push(generateFileStream(streamConf, projectDir));
-			break;
-			case "rotating-file":
-				streams.push(generateRotatingFileStream(streamConf, projectDir));
-			break;
-			default: // case "console":
-				streams.push(generateConsoleStream(streamConf));
-			break;
-		}
-	});
+	if(config.logger.streams) {
+		config.logger.streams.forEach(function(streamConf) {
+			switch (streamConf.type) {
+				case "file":
+					streams.push(generateFileStream(streamConf, projectDir));
+				break;
+				case "rotating-file":
+					streams.push(generateRotatingFileStream(streamConf, projectDir));
+				break;
+				default: // case "console":
+					streams.push(generateConsoleStream(streamConf));
+				break;
+			}
+		});
+	}
 	return streams;
 }
 
