@@ -52,6 +52,11 @@ module.exports = function (grunt) {
 			}
 		 }
 
+		 jenkins: {
+		 	command: 'mocha --reporter mocha-jenkins-reporter test/**/*.js'
+
+		 }
+
 		 // blanket_mocha: {
 		 //    src: [ paths.test +  '/**/*.js' ],
 		 //    options: {
@@ -64,7 +69,7 @@ module.exports = function (grunt) {
 });
 
 	grunt.registerTask('default', [
-		'simplemocha:all'	// run unit tests
+		'jenkins'	// run unit tests
 	]);
 
 	// Development
